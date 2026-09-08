@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ASM_Cloud — Professional Installation & User Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+:root{
+  --blue:#2E6FE0; --blue-dark:#1A3FA0; --blue-light:#EFF6FF; --blue-border:#BFDBFE;
+  --green:#10B981; --green-bg:#ECFDF5; --green-bd:#A7F3D0; --green-tx:#065F46;
+  --amber:#F59E0B; --amber-bg:#FFFBEB; --amber-bd:#FDE68A; --amber-tx:#92400E;
+  --red:#EF4444; --red-bg:#FEF2F2; --red-bd:#FECACA; --red-tx:#991B1B;
+  --gray-900:#0F172A; --gray-700:#334155; --gray-500:#64748B; --gray-400:#94A3B8; --gray-200:#E2E8F0; --gray-100:#F1F5F9; --gray-50:#F8FAFC;
+  --line:#E2E8F0; --radius:14px; --shadow:0 4px 20px rgba(15,23,42,.06), 0 1px 3px rgba(15,23,42,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--gray-900);background:#F8FAFC;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+code,pre{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace}
+code{background:#F1F5F9;padding:2px 6px;border-radius:6px;font-size:.88em;border:1px solid #E2E8F0}
+pre{background:#0F172A;color:#E2E8F0;padding:16px 18px;border-radius:12px;overflow:auto;font-size:11.5px;line-height:1.6;border:1px solid #1E293B;position:relative}
+pre .copy{position:absolute;top:8px;right:8px;font-size:10px;padding:4px 8px;border-radius:6px;background:#1E293B;color:#94A3B8;border:1px solid #334155;cursor:pointer}
+/* Header */
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:10px 22px}
+.topbar .brand{font-weight:800;letter-spacing:-.02em}
+.topbar .meta{margin-left:auto;display:flex;gap:8px;align-items:center}
+.btn{padding:8px 14px;border-radius:9px;border:1px solid var(--line);background:white;font-weight:600;font-size:13px;cursor:pointer}
+.btn-primary{background:var(--blue);color:white;border-color:var(--blue)}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.04em}
+.badge-blue{background:var(--blue);color:white}
+.badge-green{background:var(--green);color:white}
+.badge-gray{background:var(--gray-100);color:var(--gray-500);border:1px solid var(--line)}
+/* Cover */
+.cover{background:linear-gradient(135deg,#0F172A 0%,#1E3A8A 55%,#2E6FE0 100%);color:white;padding:42px 28px 34px;position:relative;overflow:hidden}
+.cover::after{content:"";position:absolute;inset:auto -80px -80px auto;width:360px;height:360px;background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 60%);border-radius:50%}
+.cover-inner{max-width:1020px;margin:0 auto;display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:center}
+.cover h1{margin:10px 0 8px;font-size:34px;letter-spacing:-.03em;line-height:1.1}
+.cover p{color:#CBD5E1;font-size:13.5px;margin:0}
+.cover .kpis{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.cover .kpis span{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:6px 10px;border-radius:999px;font-size:11px;backdrop-filter:blur(6px)}
+.cover-illus{background:white;border-radius:16px;padding:14px;box-shadow:0 20px 40px rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.15)}
+/* Layout */
+.wrap{max-width:1020px;margin:0 auto;padding:24px 20px}
+.toc{background:white;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.toc h3{margin:0 0 8px;font-size:11px;letter-spacing:.14em;color:var(--gray-500)}
+.toc a{font-size:13px;color:var(--gray-700);display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px dashed #F1F5F9}
+.toc a span:last-child{color:var(--gray-400);font-size:11px}
+.section{background:white;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:18px 0;position:relative}
+.section::before{content:"";position:absolute;left:0;top:18px;bottom:18px;width:4px;background:var(--blue);border-radius:0 4px 4px 0}
+.sec-head{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.sec-num{width:36px;height:36px;border-radius:10px;background:var(--blue);color:white;display:grid;place-items:center;font-weight:800;flex-shrink:0;box-shadow:0 6px 14px rgba(46,111,224,.35)}
+.sec-title{margin:0;font-size:16px;letter-spacing:-.02em}
+.sec-sub{margin:0;color:var(--gray-500);font-size:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:900px){.cover-inner{grid-template-columns:1fr}.grid2,.grid3{grid-template-columns:1fr}.toc{grid-template-columns:1fr}}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px;background:white}
+.card h4{margin:0 0 6px;font-size:13px}
+.card p{margin:0;color:var(--gray-500);font-size:12px}
+.callout{border-radius:12px;padding:12px 14px;border:1px solid;display:flex;gap:10px;align-items:flex-start}
+.callout-blue{background:var(--blue-light);border-color:var(--blue-border);color:#1E40AF}
+.callout-amber{background:var(--amber-bg);border-color:var(--amber-bd);color:var(--amber-tx)}
+.callout-green{background:var(--green-bg);border-color:var(--green-bd);color:var(--green-tx)}
+.callout .icon{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;flex-shrink:0;font-size:12px;font-weight:800}
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:2px;background:#E2E8F0;border-radius:2px}
+.step{position:relative;display:flex;gap:12px;margin:14px 0}
+.step .dot{position:absolute;left:-23px;top:2px;width:16px;height:16px;border-radius:50%;background:white;border:3px solid var(--blue);box-shadow:0 0 0 4px #EFF6FF}
+.step .num2{width:28px;height:28px;border-radius:9px;background:#EFF6FF;color:var(--blue);border:1px solid var(--blue-border);display:grid;place-items:center;font-weight:800;flex-shrink:0}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th{background:#F8FAFC;color:var(--gray-500);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:10px 12px;text-align:left;border-bottom:1px solid var(--line)}
+td{padding:10px 12px;border-bottom:1px solid #F1F5F9;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:#FCFDFF}
+.footer{max-width:1020px;margin:18px auto;padding:18px 20px;color:var(--gray-500);font-size:11px;display:flex;gap:12px;justify-content:space-between;border-top:1px solid var(--line)}
+@media print{
+  .topbar{position:static}
+  .cover{break-after:page}
+  .section{break-inside:avoid}
+  .btn{display:none}
+  @page{size:A4;margin:14mm 12mm 16mm 12mm;@bottom-center{content:"ASM_Cloud — Your files, your drive, your cloud.  •  docs/INSTALL_GUIDE.pdf  •  Page " counter(page); font-size:8px; color:#94A3B8}}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <img src="../assets/logo-icon.svg" width="26" height="26" alt="ASM_Cloud"/>
+  <div class="brand">ASM<span style="color:var(--blue)">_</span>Cloud</div>
+  <div style="font-size:11px;letter-spacing:.12em;color:var(--gray-500)">INSTALLATION & USER GUIDE</div>
+  <div class="meta">
+    <span class="badge badge-blue">v0.8 • Phase 8</span>
+    <span class="badge badge-gray">Private • Self-Hosted</span>
+    <button class="btn btn-primary" onclick="window.print()">Print / Save PDF</button>
+    <a class="btn" href="./INSTALL_GUIDE.md">MD</a>
+  </div>
+</div>
+
+<div class="cover">
+  <div class="cover-inner">
+    <div>
+      <div style="display:inline-flex;gap:8px;align-items:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);padding:6px 10px;border-radius:999px;font-size:11px;letter-spacing:.08em">● PRIVATE CLOUD • NEXTCLIENT-STYLE • LEAN</div>
+      <h1>Your files.<br/>Your drive.<br/><span style="color:#93C5FD">Your cloud.</span></h1>
+      <p>A professionally hosted, single-purpose file sync & share platform. Turn a spare external HDD/SSD on an always-on host into a private cloud — like Dropbox, but fully under your control.</p>
+      <div class="kpis">
+        <span>Server NestJS 20 + Postgres 15</span>
+        <span>Desktop Tauri • Tray • Overlay</span>
+        <span>Mobile Expo Bare • Offline</span>
+        <span>TLS Caddy • Let’s Encrypt</span>
+      </div>
+      <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+        <span class="badge" style="background:white;color:#0F172A">For Laymen • Copy-paste</span>
+        <span class="badge" style="background:rgba(255,255,255,.14);color:white;border:1px solid rgba(255,255,255,.2)">No coding required</span>
+      </div>
+      <div style="margin-top:16px;color:#93C5FD;font-size:11px;letter-spacing:.06em">BLUE = Do this • AMBER = Attention • GREEN = Done • Every screen shows: ● Status | Storage used/total | Last synced</div>
+    </div>
+    <div class="cover-illus">
+      <!-- Architecture mini SVG -->
+      <svg viewBox="0 0 420 260" width="100%" height="auto" role="img" aria-label="Architecture">
+        <defs>
+          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2E6FE0"/><stop offset="100%" stop-color="#1A3FA0"/></linearGradient>
+          <filter id="sh"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#1E3A8A" flood-opacity=".18"/></filter>
+        </defs>
+        <rect x="12" y="12" width="396" height="236" rx="16" fill="#F8FAFC" stroke="#E2E8F0"/>
+        <g filter="url(#sh)">
+          <rect x="18" y="22" width="118" height="74" rx="12" fill="white" stroke="#E2E8F0"/>
+          <text x="77" y="38" text-anchor="middle" font-size="9" font-weight="700" fill="#64748B">DEVICES</text>
+          <rect x="28" y="46" width="98" height="18" rx="8" fill="#EFF6FF" stroke="#BFDBFE"/><text x="77" y="58" text-anchor="middle" font-size="8" font-weight="600" fill="#1E40AF">Desktop Tauri</text>
+          <rect x="28" y="68" width="98" height="18" rx="8" fill="#ECFDF5" stroke="#A7F3D0"/><text x="77" y="80" text-anchor="middle" font-size="8" font-weight="600" fill="#065F46">Mobile Expo</text>
+        </g>
+        <g filter="url(#sh)">
+          <rect x="150" y="22" width="120" height="74" rx="12" fill="white" stroke="#E2E8F0"/>
+          <text x="210" y="38" text-anchor="middle" font-size="9" font-weight="700" fill="#64748B">ALWAYS-ON HOST</text>
+          <rect x="160" y="46" width="100" height="18" rx="8" fill="url(#g)"/><text x="210" y="58" text-anchor="middle" font-size="8" font-weight="700" fill="white">Server NestJS</text>
+          <text x="210" y="76" text-anchor="middle" font-size="7" fill="#64748B">Postgres • Caddy :443</text>
+        </g>
+        <g filter="url(#sh)">
+          <rect x="284" y="22" width="118" height="74" rx="12" fill="white" stroke="#E2E8F0"/>
+          <text x="343" y="38" text-anchor="middle" font-size="9" font-weight="700" fill="#64748B">EXTERNAL DRIVE</text>
+          <rect x="294" y="46" width="98" height="22" rx="8" fill="#0F172A"/><text x="343" y="60" text-anchor="middle" font-size="8" font-weight="700" fill="white">/mnt/storage</text>
+          <text x="343" y="78" text-anchor="middle" font-size="7" fill="#64748B">{userId}/... .versions/</text>
+        </g>
+        <!-- Arrows -->
+        <g stroke="#2E6FE0" stroke-width="1.6" fill="none" marker-end="url(#arrow)">
+          <path d="M136 58 H150"/><path d="M270 58 H284"/>
+        </g>
+        <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2E6FE0"/></marker></defs>
+        <text x="210" y="112" text-anchor="middle" font-size="7" fill="#94A3B8">HTTPS chunked 10 MB • ETag • WebSocket /sync → “changes available”</text>
+        <rect x="18" y="122" width="384" height="54" rx="10" fill="white" stroke="#E2E8F0"/>
+        <text x="210" y="136" text-anchor="middle" font-size="8" font-weight="700" fill="#334155">Share Links • Versioning (5) • Trash 30d • Quota • Admin</text>
+        <text x="210" y="150" text-anchor="middle" font-size="7" fill="#64748B">Public /api/public/share/:token  •  password / expiry  •  read-only  •  Range resumable</text>
+        <text x="210" y="164" text-anchor="middle" font-size="7" fill="#64748B">Conflict → “(conflicted copy YYYY-MM-DD).ext”  •  never auto-overwrite</text>
+        <rect x="18" y="188" width="384" height="44" rx="10" fill="#0F172A"/>
+        <text x="210" y="204" text-anchor="middle" font-size="8" font-weight="700" fill="white">ASM_Cloud Design System</text>
+        <text x="210" y="218" text-anchor="middle" font-size="7" fill="#93C5FD">Primary #2E6FE0  •  Green synced  Amber syncing  Red conflict  Gray offline  •  Outline 20/24px  •  SF / Roboto / Segoe</text>
+      </svg>
+      <div style="display:flex;gap:6px;margin-top:10;flex-wrap:wrap">
+        <span class="badge" style="background:#EFF6FF;color:#1E40AF;border:1px solid #BFDBFE">StorageAdapter</span>
+        <span class="badge" style="background:#ECFDF5;color:#065F46;border:1px solid #A7F3D0">LocalDiskAdapter</span>
+        <span class="badge" style="background:#FFFBEB;color:#92400E;border:1px solid #FDE68A">sync:changes cursor</span>
+        <span class="badge" style="background:#F1F5F9;color:#334155;border:1px solid #E2E8F0">Phase 8 Prod</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="toc">
+    <div>
+      <h3>CONTENTS</h3>
+      <a href="#s1"><span>01 — What You Need</span><span>Shopping list</span></a>
+      <a href="#s2"><span>02 — How It Fits</span><span>Architecture</span></a>
+      <a href="#s3"><span>03 — Step A: Prepare Drive</span><span>5 min</span></a>
+      <a href="#s4"><span>04 — Step B: Server</span><span>Prod & Dev</span></a>
+      <a href="#s5"><span>05 — Step C: Desktop</span><span>Tauri</span></a>
+      <a href="#s6"><span>06 — Step D: Mobile</span><span>Expo Bare</span></a>
+    </div>
+    <div>
+      <h3 style="margin-top:0">CONTENTS</h3>
+      <a href="#s7"><span>07 — Everyday Use</span><span>Tasks</span></a>
+      <a href="#s8"><span>08 — Admin</span><span>Quotas</span></a>
+      <a href="#s9"><span>09 — Shares & Security</span><span>Links</span></a>
+      <a href="#s10"><span>10 — Go Live (HTTPS)</span><span>Caddy</span></a>
+      <a href="#s11"><span>11 — Troubleshooting</span><span>Fixes</span></a>
+      <a href="#s12"><span>12 — Cheat-Sheet</span><span>All commands</span></a>
+    </div>
+  </div>
+  <div class="callout callout-blue"><span class="icon" style="background:#2E6FE0;color:white">i</span><div><b>How to use this guide:</b> Follow <b>A → B → C → D</b> in order. Copy-paste the <code>blue</code> commands exactly. The drive is the volume, not the server — the server is a small program on the host that talks to the drive.</div></div>
+
+  <!-- Section 1 -->
+  <div class="section" id="s1">
+    <div class="sec-head">
+      <div class="sec-num">01</div>
+      <div><h2 class="sec-title">What You Need — Shopping List</h2><p class="sec-sub">Hardware & software for a private home cloud rated for laymen</p></div>
+      <span class="badge badge-gray" style="margin-left:auto">5 min to read</span>
+    </div>
+    <div class="grid3">
+      <div class="card">
+        <div style="width:28px;height:28px;border-radius:8px;background:#EFF6FF;display:grid;place-items:center;color:var(--blue);font-weight:800">▭</div>
+        <h4>Always-on Host</h4>
+        <p>Old laptop, mini-PC, Raspberry Pi 4/5 (2 GB) or NAS that runs Docker. Pi 5 + SSD is silent, ~5 W.</p>
+        <div style="margin-top:8px"><span class="badge" style="background:#F1F5F9;border:1px solid var(--line);color:var(--gray-700)">Don’t use your daily laptop — it sleeps</span></div>
+      </div>
+      <div class="card">
+        <div style="width:28px;height:28px;border-radius:8px;background:#ECFDF5;display:grid;place-items:center;color:var(--green);font-weight:800">⬢</div>
+        <h4>External HDD / SSD</h4>
+        <p>500 GB – 4 TB USB, ext4 (Linux) or NTFS (Windows). This <i>is</i> your cloud — back it up.</p>
+        <div style="margin-top:8px"><span class="badge" style="background:#F1F5F9;border:1px solid var(--line);color:var(--gray-700)">Mounted at <code>/mnt/storage</code></span></div>
+      </div>
+      <div class="card">
+        <div style="width:28px;height:28px;border-radius:8px;background:#FFFBEB;display:grid;place-items:center;color:var(--amber);font-weight:800">⬔</div>
+        <h4>Network</h4>
+        <p>Home router. Optional domain <code>cloud.example.com</code> → host public IP. Without it, <code>http://192.168.1.50:3000</code> at home works.</p>
+        <div style="margin-top:8px"><span class="badge" style="background:#F1F5F9;border:1px solid var(--line);color:var(--gray-700)">UPS recommended</span></div>
+      </div>
+    </div>
+    <table style="margin-top:12px">
+      <tr><th>Item</th><th>Minimum</th><th>Why</th></tr>
+      <tr><td><b>Host CPU/RAM</b></td><td>Pi 4 (2 GB) for 1–5 users; Pi 5 / mini-PC for 10+</td><td>Chunked 10 MB handles large videos even on Pi</td></tr>
+      <tr><td><b>OS</b></td><td>Debian/Ubuntu, Raspberry Pi OS, or Windows 10/11</td><td>Docker on Linux is one-command prod</td></tr>
+      <tr><td><b>Software</b></td><td>Docker + Compose (prod) or Node 20 + PG 15 (dev)</td><td>SQLite fallback for dev only</td></tr>
+    </table>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="section" id="s2">
+    <div class="sec-head">
+      <div class="sec-num">02</div>
+      <div><h2 class="sec-title">How It Fits Together — Architecture</h2><p class="sec-sub">Lean Nextcloud: only file sync, no Calendar/Mail bloat</p></div>
+    </div>
+    <div style="border:1px solid var(--line);border-radius:12px;overflow:hidden;background:white">
+      <div style="display:grid;grid-template-columns:1.1fr 1.6fr;gap:0">
+        <div style="padding:16px;border-right:1px solid var(--line)">
+          <div style="font-size:11px;letter-spacing:.1em;color:var(--gray-500);font-weight:700">DATA FLOW</div>
+          <div class="timeline">
+            <div class="step"><span class="dot"></span><div><b style="font-size:12px">Devices</b><div style="font-size:12px;color:var(--gray-500)">Desktop <code>~/PersonalCloud</code> (Tauri <code>notify</code>) + Mobile browse-cloud</div></div></div>
+            <div class="step"><span class="dot"></span><div><b style="font-size:12px">Server NestJS</b><div style="font-size:12px;color:var(--gray-500)">Auth JWT + <code>StorageAdapter</code> + Postgres metadata</div></div></div>
+            <div class="step"><span class="dot"></span><div><b style="font-size:12px">External Drive</b><div style="font-size:12px;color:var(--gray-500)"><code>/mnt/storage/asm-cloud-data/{userId}/...</code> + <code>.versions/</code> + <code>.asm-chunks/</code></div></div></div>
+            <div class="step"><span class="dot" style="border-color:var(--green);box-shadow:0 0 0 4px #ECFDF5"></span><div><b style="font-size:12px">Caddy :443</b><div style="font-size:12px;color:var(--gray-500)">Let’s Encrypt auto HTTPS • WebSocket <code>/sync</code> push</div></div></div>
+          </div>
+        </div>
+        <div style="padding:16px;background:#F8FAFC">
+          <div style="font-size:11px;letter-spacing:.1em;color:var(--gray-500);font-weight:700">PROTOCOL (NEW, NOT WEBDAV)</div>
+          <div style="display:grid;gap:8px;margin-top:10">
+            <div style="display:flex;gap:8px;align-items:center;padding:8px 10px;background:white;border:1px solid var(--line);border-radius:10"><span class="badge badge-blue">POST</span><code>/api/files/upload</code> <span style="color:var(--gray-500);font-size:11px">single ≤100 MB</span></div>
+            <div style="display:flex;gap:8px;align-items:center;padding:8px 10px;background:white;border:1px solid var(--line);border-radius:10"><span class="badge" style="background:#8B5CF6;color:white">CHUNK</span><code>/api/files/chunked/init → /chunk/:i → /complete</code></div>
+            <div style="display:flex;gap:8px;align-items:center;padding:8px 10px;background:white;border:1px solid var(--line);border-radius:10"><span class="badge badge-gray">SYNC</span><code>/api/sync/changes?since=&lt;cursor&gt;</code> <span style="color:var(--gray-500);font-size:11px">cursor = base64url(ts,id)</span></div>
+            <div style="display:flex;gap:8px;align-items:center;padding:8px 10px;background:white;border:1px solid var(--line);border-radius:10"><span class="badge" style="background:var(--green);color:white">WS</span><code>/sync</code> <span style="color:var(--gray-500);font-size:11px">push “changes available” → clients sync now</span></div>
+            <div style="display:flex;gap:8px;align-items:center;padding:8px 10px;background:white;border:1px solid var(--line);border-radius:10"><span class="badge" style="background:#0F172A;color:white">SHARE</span><code>/api/public/share/:token</code> <span style="color:var(--gray-500);font-size:11px">password/expiry, read-only</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-blue" style="margin-top:12px"><span class="icon" style="background:var(--blue);color:white">◇</span><div><b>Lock:</b> Never auto-overwrites. Conflicts become <code>photo (conflicted copy 2026-09-08).jpg</code> + log. ETag + SHA-256 verified.</div></div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="section" id="s3">
+    <div class="sec-head">
+      <div class="sec-num">03</div>
+      <div><h2 class="sec-title">Step A — Prepare the External Drive</h2><p class="sec-sub">The drive is the cloud volume • 5 minutes</p></div>
+      <span class="badge badge-green" style="margin-left:auto">Step A</span>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h4>Windows (dev)</h4>
+        <div class="step"><span class="num2">1</span><div style="font-size:13px">Plug drive → Format NTFS → note letter <code>F:</code> → create <code>F:\asm-cloud-data</code></div></div>
+        <div class="step"><span class="num2">2</span><div style="font-size:13px">In <code>server/.env</code> set <code>STORAGE_ROOT=F:/asm-cloud-data</code></div></div>
+      </div>
+      <div class="card">
+        <h4>Linux / Pi / NAS (prod)</h4>
+        <pre>sudo mkdir -p /mnt/storage/asm-cloud-data
+sudo mkfs.ext4 /dev/sda1          # only if new/empty! wipes!
+sudo mount /dev/sda1 /mnt/storage/asm-cloud-data
+echo '/dev/sda1 /mnt/storage/asm-cloud-data ext4 defaults,nofail 0 2' | sudo tee -a /etc/fstab
+sudo chown -R $USER:$USER /mnt/storage/asm-cloud-data
+ls /mnt/storage/asm-cloud-data    # empty = done</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="section" id="s4">
+    <div class="sec-head">
+      <div class="sec-num">04</div>
+      <div><h2 class="sec-title">Step B — Install the Server</h2><p class="sec-sub">Pick prod (one-command) or dev (Windows)</p></div>
+    </div>
+    <div style="border:1px solid #BFDBFE;background:#EFF6FF;border-radius:12px;padding:16px">
+      <div style="display:flex;gap:8px;align-items:center"><span class="badge badge-blue">B1 Recommended</span><b style="font-size:13px">One-command prod — Docker + Caddy HTTPS</b><span class="badge badge-green" style="margin-left:auto">Prod</span></div>
+      <pre style="margin-top:10">git clone https://github.com/YOURNAME/ASM_Cloud.git
+cd ASM_Cloud/server
+cp .env.example .env
+nano .env   # CHANGE: DB_PASSWORD, JWT_*_SECRET (32+ chars), ADMIN_INVITE_TOKEN,
+          # STORAGE_ROOT=/mnt/storage/asm-cloud-data, PUBLIC_BASE_URL=https://cloud.example.com</pre>
+      <pre>nano Caddyfile   # top line = your domain
+cloud.example.com {
+  reverse_proxy server:3000
+}</pre>
+      <pre>docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+docker compose logs -f server   # wait "ASM_Cloud server listening on ...:3000"</pre>
+      <div class="callout callout-green"><span class="icon" style="background:var(--green);color:white">✓</span><div>Check: <code>curl -X POST http://localhost:3000/api/auth/register ...</code> → <code>{"user":{"id":...}}</code></div></div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <div style="display:flex;gap:8px;align-items:center"><span class="badge badge-gray">B2 Dev</span><b style="font-size:13px">Windows without Docker</b></div>
+      <pre style="margin-top:10">cd F:\ASM_Cloud\server
+copy .env.example .env   # set STORAGE_ROOT=F:/ASM_Cloud/data/storage and DB_TYPE=sqlite
+npm install
+npm run start:dev   # http://localhost:3000/api</pre>
+      <div class="callout callout-amber"><span class="icon" style="background:var(--amber);color:white">!</span><div><code>DB_TYPE=sqlite</code> is dev only. Prod uses Postgres 15.</div></div>
+    </div>
+    <div style="margin-top:12px">
+      <div style="font-size:11px;letter-spacing:.1em;color:var(--gray-500);font-weight:700">VERIFY</div>
+      <pre>curl -X POST http://localhost:3000/api/auth/login -H "Content-Type: application/json" -d '{"username":"alice","password":"S3cure!pass"}'
+curl -X POST http://localhost:3000/api/files/upload -H "Authorization: Bearer &lt;token&gt;" -F "file=@hello.txt" -F "path=docs/hello.txt"
+curl http://localhost:3000/api/files/download?path=docs/hello.txt -H "Authorization: Bearer &lt;token&gt;" -o hello.txt</pre>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="section" id="s5">
+    <div class="sec-head">
+      <div class="sec-num">05</div>
+      <div><h2 class="sec-title">Step C — Desktop App (Tauri)</h2><p class="sec-sub">Windows / macOS / Linux • lighter than Electron • tray + overlay</p></div>
+      <span class="badge badge-gray">Phase 3–4,8</span>
+    </div>
+    <pre>cd desktop
+npm install
+npm run dev          # web preview mock http://localhost:1420
+cargo install tauri-cli   # needs Rust https://rustup.rs
+npm run tauri:dev    # real window + tray + ~/PersonalCloud picker
+npm run tauri:build  # installer src-tauri/target/release/bundle/</pre>
+    <div class="timeline">
+      <div class="step"><span class="dot"></span><div><b>1. Login</b><div style="font-size:12px;color:var(--gray-500)">Server URL <code>http://localhost:3000</code> or <code>https://cloud.example.com</code> → <code>alice / S3cure!pass</code></div></div></div>
+      <div class="step"><span class="dot"></span><div><b>2. Settings → Sync folder</b><div style="font-size:12px;color:var(--gray-500)"><code>Browse…</code> → <code>C:\Users\You\PersonalCloud</code> — like Nextcloud <code>~/Nextcloud</code>, watched by Rust <code>notify</code></div></div></div>
+      <div class="step"><span class="dot"></span><div><b>3. Selective Sync</b><div style="font-size:12px;color:var(--gray-500)">Check <code>docs/</code>, <code>Photos/</code> (empty = all). Vital for mobile storage.</div></div></div>
+      <div class="step"><span class="dot" style="border-color:var(--green)"></span><div><b>4. Sync now</b><div style="font-size:12px;color:var(--gray-500)">Activity Log: <code>Downloaded docs/hello.txt (17 B)</code> • Tray <span class="badge badge-green">synced</span> <span class="badge" style="background:#FEF3C7;color:#92400E">syncing</span> <span class="badge" style="background:#FECACA;color:#991B1B">error</span></div></div></div>
+    </div>
+    <div class="callout callout-amber"><span class="icon" style="background:var(--amber);color:white">!</span><div>Drop file into <code>~/PersonalCloud/docs/test.txt</code> → tray <span style="font-size:11px;background:#FEF3C7;padding:2px 6px;border-radius:999px;border:1px solid #FDE68A">syncing</span> → <span style="font-size:11px;background:#ECFDF5;padding:2px 6px;border-radius:999px;border:1px solid #A7F3D0">synced</span>. Edit same file on two devices → <code>(conflicted copy 2026-09-08).txt</code> keeps both.</div></div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="section" id="s6">
+    <div class="sec-head">
+      <div class="sec-num">06</div>
+      <div><h2 class="sec-title">Step D — Mobile App (Expo Bare)</h2><p class="sec-sub">Android / iOS • browse-cloud, not mirror</p></div>
+      <span class="badge badge-gray">Phase 5–6</span>
+    </div>
+    <pre>cd mobile
+npm install --legacy-peer-deps --ignore-scripts
+npx expo start           # web preview
+npx expo run:android     # emulator needs 10.0.2.2:3000 (not localhost)
+npx expo run:ios</pre>
+    <div class="grid2">
+      <div class="card"><h4>1. Login</h4><p>Server URL <code>http://192.168.1.50:3000</code> (home) or HTTPS domain — Expo SecureStore on device.</p></div>
+      <div class="card"><h4>2. Browse cloud</h4><p><code>Root → 📁 docs/ → 📄 shared.txt → Open</code> (on-demand <code>206 Range</code>) or <code>Keep offline ✓</code> → <b>Offline</b> tab (plane-readable, <code>FileSystem.documentDirectory</code>).</p></div>
+      <div class="card"><h4>3. Camera</h4><p><code>Enable auto-upload</code> (Wi-Fi only ON) → <code>Photos/Camera</code> → <code>Run now</code> / <code>Enable background (15 min)</code>. Android add <code>foregroundServiceType="dataSync"</code>.</p></div>
+      <div class="card"><h4>4. Share to PersonalCloud</h4><p>From any app → <code>Share → ASM_Cloud → Shared/</code> (<code>src/lib/share.ts:1</code>, <code>intentFilters</code> bare rebuild).</p></div>
+    </div>
+  </div>
+
+  <!-- Section 7 -->
+  <div class="section" id="s7">
+    <div class="sec-head">
+      <div class="sec-num">07</div>
+      <div><h2 class="sec-title">Everyday Use — Tasks</h2><p class="sec-sub">The three clients talk to the same account</p></div>
+    </div>
+    <table>
+      <tr><th>I want to…</th><th>Do this</th><th>Status</th></tr>
+      <tr><td>Drop file on desktop</td><td>Drag into <code>~/PersonalCloud/docs/</code></td><td><span class="badge badge-green">synced</span></td></tr>
+      <tr><td>Get file on phone</td><td>Browse → <code>Open</code> (on-demand)</td><td><span class="badge" style="background:#DBEAFE;color:#1E40AF">206 Range</span></td></tr>
+      <tr><td>Keep for plane</td><td><code>Keep offline ✓</code> → Offline tab</td><td><span class="badge badge-green">offline ✓</span></td></tr>
+      <tr><td>Camera auto</td><td>Camera tab → Enable → Run now</td><td><span class="badge" style="background:#FEF3C7;color:#92400E">Wi-Fi</span></td></tr>
+      <tr><td>Recover old version</td><td><code>GET /api/files/versions?path=docs/report.pdf</code> → <code>POST /versions/restore?path=...&amp;version=1</code></td><td>keep 5</td></tr>
+      <tr><td>Trash 30d</td><td><code>DELETE /api/files?path=docs/old.txt</code> → <code>GET /api/files/trash</code></td><td>soft delete</td></tr>
+    </table>
+    <div style="margin-top:10;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <span class="badge" style="background:#ECFDF5;color:#065F46;border:1px solid #A7F3D0">synced #10B981</span>
+      <span class="badge" style="background:#FFFBEB;color:#92400E;border:1px solid #FDE68A">syncing #F59E0B</span>
+      <span class="badge" style="background:#FEF2F2;color:#991B1B;border:1px solid #FECACA">conflict #EF4444</span>
+      <span class="badge" style="background:#F1F5F9;color:#475569;border:1px solid #E2E8F0">offline #9CA3AF</span>
+      <span style="font-size:11px;color:var(--gray-500);margin-left:8px">Every screen: <b>● Status | Storage used/total | Last synced</b> <span style="color:var(--blue)">#2E6FE0</span></span>
+    </div>
+  </div>
+
+  <!-- Section 8 -->
+  <div class="section" id="s8">
+    <div class="sec-head">
+      <div class="sec-num">08</div>
+      <div><h2 class="sec-title">Admin — Users, Quotas, Storage</h2><p class="sec-sub">First registered user is <code>isAdmin:true</code></p></div>
+      <span class="badge badge-blue">Admin only</span>
+    </div>
+    <pre>TOKEN=$(curl -s -X POST https://cloud.example.com/api/auth/login -H "Content-Type: application/json" -d '{"username":"alice","password":"S3cure!pass"}' | jq -r .accessToken)
+curl https://cloud.example.com/api/admin/users -H "Authorization: Bearer $TOKEN"
+curl -X POST https://cloud.example.com/api/admin/users -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"username":"bob","email":"bob@home","password":"Another!pass","quotaBytes":"5368709120"}'
+curl -X POST https://cloud.example.com/api/admin/users/&lt;id&gt;/quota -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"quotaBytes":"5368709120"}'
+curl https://cloud.example.com/api/admin/dashboard -H "Authorization: Bearer $TOKEN"
+# → drive {total,free,used,path}  perUser [{username,quotaBytes,usedBytes,quotaUsedPct,fileCount}]</pre>
+    <div class="callout callout-blue"><span class="icon" style="background:var(--blue);color:white">≡</span><div>Desktop <b>AdminPanel</b> <code>desktop/src/components/AdminPanel.tsx:1</code> shows drive total/free, per-user bar, Edit quota, Create user — admin only, else <code>403</code>.</div></div>
+    <div class="callout callout-amber"><span class="icon" style="background:var(--amber);color:white">!</span><div>Quota exceeded <code>413</code> on <code>POST /api/files/upload</code> / chunked complete → Activity Log <span style="background:#FECACA;padding:2px 6px;border-radius:999px;font-size:11px">error</span></div></div>
+  </div>
+
+  <!-- Section 9 -->
+  <div class="section" id="s9">
+    <div class="sec-head">
+      <div class="sec-num">09</div>
+      <div><h2 class="sec-title">Share Links & Security</h2><p class="sec-sub">File + folder, password, expiry — public read-only like Nextcloud</p></div>
+    </div>
+    <pre>curl -X POST https://cloud.example.com/api/shares -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"path":"docs/report.pdf","password":"s3cret","expiresAt":"2026-12-31T00:00:00Z"}'
+# → {"token":"xfqRhYXQjxk_","url":"/api/public/share/xfqRhYXQjxk_"}
+curl https://cloud.example.com/api/public/share/xfqRhYXQjxk_                           # info (hasPassword?)
+curl https://cloud.example.com/api/public/share/xfqRhYXQjxk_/download -H "X-Share-Password: s3cret" -o report.pdf
+# folder
+curl -X POST https://cloud.example.com/api/shares -H "Authorization: Bearer $TOKEN" -d '{"path":"Photos","isFolder":true}'</pre>
+    <div class="callout callout-green"><span class="icon" style="background:var(--green);color:white">✓</span><div>Security: JWT <code>15m</code> + refresh <code>7d</code>, <code>argon2</code>, share <code>argon2</code> + expiry <code>403</code>, every endpoint checks owner/share, ETag + SHA-256, TLS via Caddy Let’s Encrypt <code>server/Caddyfile:1</code>. Desktop <b>ShareDialog</b> / Mobile <b>Share</b> copy <code>.../api/public/share/.../download</code>.</div></div>
+  </div>
+
+  <!-- Section 10 -->
+  <div class="section" id="s10">
+    <div class="sec-head">
+      <div class="sec-num">10</div>
+      <div><h2 class="sec-title">Go Live — HTTPS via Caddy</h2><p class="sec-sub">Automatic Let’s Encrypt • one domain</p></div>
+    </div>
+    <div class="grid2">
+      <div class="card"><h4>1. DNS</h4><p>Domain <code>cloud.example.com</code> → host public IP (router forward <code>80,443</code> → host).</p></div>
+      <div class="card"><h4>2. Env & Caddyfile</h4><p><code>.env</code> <code>PUBLIC_BASE_URL=https://cloud.example.com</code> <code>CORS_ORIGIN=https://cloud.example.com</code> • <code>Caddyfile</code> line 1 = your domain → <code>reverse_proxy server:3000</code></p></div>
+    </div>
+    <pre style="margin-top:12px">docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d   # Caddy auto-TLS + WebSocket proxy
+# home-only: skip Caddy, use http://192.168.1.50:3000</pre>
+    <div class="callout callout-amber"><span class="icon" style="background:var(--amber);color:white">!</span><div>Never expose Postgres <code>5432</code> publicly — prod binds <code>127.0.0.1:5432:5432</code> only.</div></div>
+  </div>
+
+  <!-- Section 11 -->
+  <div class="section" id="s11">
+    <div class="sec-head">
+      <div class="sec-num">11</div>
+      <div><h2 class="sec-title">Troubleshooting — For Laymen</h2><p class="sec-sub">Copy the fix exactly</p></div>
+    </div>
+    <table>
+      <tr><th>Symptom</th><th>Fix</th></tr>
+      <tr><td><code>Quota exceeded 413</code></td><td>Admin increase quota or <code>POST /api/files/trash/purge</code> — check <code>GET /api/admin/storage</code></td></tr>
+      <tr><td><span style="background:#FECACA;padding:2px 6px;border-radius:999px;font-size:11px">error</span> ETag mismatch</td><td>Check <code>(conflicted copy)</code>, pick one, delete the other</td></tr>
+      <tr><td><span style="background:#E2E8F0;padding:2px 6px;border-radius:999px;font-size:11px">offline</span> connect_error</td><td><code>docker compose logs server</code> → <code>docker compose restart server</code>; check <code>ls /mnt/storage/asm-cloud-data</code></td></tr>
+      <tr><td>Mobile media permission</td><td>Settings → Apps → ASM_Cloud → Photos → Allow</td></tr>
+      <tr><td>Camera skip not Wi-Fi</td><td>Expected if Wi-Fi-only ON; connect Wi-Fi or OFF toggle</td></tr>
+      <tr><td>Drive full</td><td><code>GET /api/admin/storage</code> → add HDD, <code>rsync -a</code></td></tr>
+    </table>
+    <p style="font-size:12px;color:var(--gray-500)">Logs: <code>docker compose logs -f server/caddy</code> • Desktop Activity Log is your first look. Server push is <code>RealtimeGateway</code> <code>server/src/modules/realtime/realtime.gateway.ts:1</code> → <code>sync:changes</code>.</p>
+  </div>
+
+  <!-- Section 12 -->
+  <div class="section" id="s12">
+    <div class="sec-head">
+      <div class="sec-num">12</div>
+      <div><h2 class="sec-title">Cheat-Sheet — All Commands</h2><p class="sec-sub">Copy-paste ready • Phase 1–8</p></div>
+    </div>
+    <pre># Server health
+docker compose ps
+docker compose logs -f server | grep ASM_Cloud
+# Auth
+curl -X POST http://localhost:3000/api/auth/register -H "Content-Type: application/json" -d '{"username":"alice","email":"alice@home","password":"S3cure!pass","inviteToken":"..."}'
+curl -X POST http://localhost:3000/api/auth/login -H "Content-Type: application/json" -d '{"username":"alice","password":"S3cure!pass"}'
+# Files
+curl -X POST http://localhost:3000/api/files/upload -H "Authorization: Bearer $TOKEN" -F "file=@big.mp4" -F "path=videos/big.mp4"   # chunked auto &gt;10MB
+curl http://localhost:3000/api/files/download?path=videos/big.mp4 -H "Authorization: Bearer $TOKEN" --range 0-10485759 -o part.bin
+curl "http://localhost:3000/api/sync/changes?since=&lt;cursor&gt;" -H "Authorization: Bearer $TOKEN"
+# Shares
+curl -X POST http://localhost:3000/api/shares -H "Authorization: Bearer $TOKEN" -d '{"path":"docs/report.pdf","password":"x"}'
+curl http://localhost:3000/api/public/share/&lt;token&gt;/download -H "X-Share-Password: x" -o report.pdf
+# Admin
+curl http://localhost:3000/api/admin/dashboard -H "Authorization: Bearer $TOKEN"
+# Clients
+cd desktop && npm run dev          # or npm run tauri:dev
+cd mobile && npx expo start        # 10.0.2.2:3000 on Android emulator</pre>
+    <div class="callout callout-blue"><span class="icon" style="background:var(--blue);color:white">i</span><div><b>Nextcloud alignment:</b> Server PHP/WebDAV vs ASM_Cloud NEW protocol + <code>StorageAdapter</code>; Desktop C++/Qt vs Tauri Rust+Web (lighter); Mobile Kotlin/Swift vs Expo bare — all share the same <code>packages/sync-engine</code> chunking/diff/backoff.</div></div>
+  </div>
+
+  <div style="text-align:center;padding:18px;border:1px solid var(--line);border-radius:14px;background:white;margin-top:18px;box-shadow:var(--shadow)">
+    <img src="../assets/logo-icon.svg" width="44" height="44" alt="icon"/>
+    <div style="font-weight:800;margin-top:6px">ASM_Cloud <span style="font-weight:400;color:var(--gray-500)">— Your files, your drive, your cloud.</span></div>
+    <div style="font-size:11px;color:var(--gray-500)">Professional Edition • Phase 8 • server/DEPLOY.md • desktop/README.md • mobile/README.md • assets/logo.svg • Theming: Inter / SF Pro / Roboto</div>
+    <div style="margin-top:10;display:inline-flex;gap:6px">
+      <span class="badge" style="background:var(--blue);color:white">Private</span>
+      <span class="badge" style="background:var(--green);color:white">Self-Hosted</span>
+      <span class="badge" style="background:var(--gray-900);color:white">Lean • Single-Purpose</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <span>© ASM_Cloud — docs/INSTALL_GUIDE.pdf • Built 2026-09-08</span>
+  <span>server/src/app.module.ts:1 • StorageAdapter • Phase 8 Prod Ready • Print: Ctrl+P</span>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+ASM_Cloud Server v0.8.0 ? Placeholder EXE
+
+This is a placeholder for the standalone Server EXE (Node 20 + native argon2/sqlite3).
+Real EXE is built via GitHub Actions on tag v* (see .github/workflows/release.yml).
+
+To run server without EXE, use Docker prod:
+  docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d
+
+See docs/INSTALL_GUIDE.pdf for full guide.
+
