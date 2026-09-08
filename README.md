@@ -20,8 +20,8 @@ Source is <b>private</b> at <a href="https://github.com/siddgithub2022/ASM_Cloud
 
 | Platform | File | Size | How to Install | SHA256 |
 |----------|------|------|----------------|--------|
-| **Server — Windows** | `ASM_Cloud-Server-win-x64.exe` | ~58 MB | `ASM_Cloud-Server-win-x64.exe --help` → sets `STORAGE_ROOT` + `PORT` (no Node needed, standalone) | `see release` |
-| **Server — Linux** (Pi/mini-PC) | `ASM_Cloud-Server-linux-x64` | ~56 MB | `chmod +x ASM_Cloud-Server-linux-x64 && ./ASM_Cloud-Server-linux-x64` → Docker prod still recommended (`server/DEPLOY.md`) | `see release` |
+| **Server — Windows** | `ASM_Cloud-Server-v0.8.0-win.zip` | ~0.2 MB + Node | Unzip → double-click `run.bat` (auto `npm install` first run, needs Node 20) → `http://localhost:3000` — **FIXED** (was placeholder EXE) | `see release` |
+| **Server — Linux** (Pi/mini-PC) | `docker-compose` (prod, inside zip) | — | `docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d` → Caddy HTTPS — see `Caddyfile.example` | `see release` |
 | **Desktop — Windows** | `ASM_Cloud-Desktop-0.8.0-win-x64.msi` / `.exe` | ~14 MB | Double-click MSI → tray `●` → Login `https://cloud.example.com` | `see release` |
 | **Desktop — macOS** | `ASM_Cloud-Desktop-0.8.0-mac-universal.dmg` | ~18 MB | Open DMG → drag to Applications → tray | `see release` |
 | **Desktop — Linux** | `ASM_Cloud-Desktop-0.8.0-linux-x64.AppImage` | ~16 MB | `chmod +x *.AppImage && ./ASM_Cloud-Desktop*.AppImage` | `see release` |
@@ -36,17 +36,18 @@ Source is <b>private</b> at <a href="https://github.com/siddgithub2022/ASM_Cloud
 ## 🚀 Quick Start (Layman)
 
 ### Server (pick one)
-**A) Standalone EXE (no Docker, no Node):**
+**A) Windows ZIP (layman, no Docker) — FIXED:**
 ```powershell
-# Windows
-.\ASM_Cloud-Server-win-x64.exe --port 3000 --storage "F:\asm-cloud-data" --db sqlite
-# Linux/Pi
-./ASM_Cloud-Server-linux-x64 --port 3000 --storage /mnt/storage/asm-cloud-data
-# then in another terminal:
-curl -X POST http://localhost:3000/api/auth/register -H "Content-Type: application/json" -d '{"username":"alice","email":"alice@home","password":"S3cure!pass","inviteToken":"..."}'
+# 1. Install Node 20 LTS https://nodejs.org (tick Add to PATH)
+# 2. Unzip ASM_Cloud-Server-v0.8.0-win.zip → open folder → double-click run.bat
+#    (first run auto npm install, creates .env from .env.example)
+# 3. Edit .env if needed (STORAGE_ROOT, JWT secrets), re-run run.bat
+# 4. Then:
+curl -X POST http://localhost:3000/api/auth/register -H "Content-Type: application/json" -d '{"username":"alice","email":"alice@home","password":"S3cure!pass","inviteToken":"initial-admin-invite-token-change-me"}'
+# check: curl http://localhost:3000/api/auth/login ... → 200
 ```
 
-**B) Docker prod (recommended, Caddy HTTPS):** See private source `server/DEPLOY.md` — `docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d`
+**B) Docker prod (recommended, Caddy HTTPS, Pi/NAS):** Unzip → `docker compose -f docker-compose.yml -f docker-compose.prod.yml up --build -d` — see `Caddyfile.example`
 
 ### Desktop
 1. Install MSI/DMG/AppImage → tray `●` → Login `https://cloud.example.com` → `alice`
@@ -60,8 +61,9 @@ Full visual guide (with pictures): **[INSTALL_GUIDE.pdf](https://github.com/sidd
 
 ---
 
-## 🔒 Security
-- Server EXE embeds Node 20 (no external deps), JWT `15m` + `argon2`, share `argon2`, ETag+SHA256, Caddy Let’s Encrypt.
+## 🔒 Security + Fix Notes
+- **Server FIXED:** Placeholder `*.exe` was 1-line text → **replaced with `ASM_Cloud-Server-v0.8.0-win.zip` + `run.bat`** (Node 20, `argon2`/`sqlite3` native → `pkg` EXE needs `node18` + `assets` config, so ZIP is reliable for laymen). Real standalone EXE via GitHub Actions `release.yml` on tag `v*`.
+- Server: JWT `15m` + `argon2`, share `argon2`, ETag+SHA256, Caddy Let’s Encrypt.
 - Desktop/Mobile verify TLS, no plaintext tokens logged.
 - Source is **private** — only binaries + docs are public here (as you requested).
 
