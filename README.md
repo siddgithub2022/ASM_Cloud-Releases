@@ -59,6 +59,8 @@ curl -X POST http://localhost:3000/api/auth/register -H "Content-Type: applicati
 
 Full visual guide (with pictures): **[INSTALL_GUIDE.pdf](https://github.com/siddgithub2022/ASM_Cloud-Releases/releases/download/v0.8.0/INSTALL_GUIDE-v0.8.0.pdf)** — also **[HTML printable](https://github.com/siddgithub2022/ASM_Cloud-Releases/releases/download/v0.8.0/INSTALL_GUIDE-v0.8.0.html)** or [`INSTALL_GUIDE-v0.8.0.pdf` direct](https://raw.githubusercontent.com/siddgithub2022/ASM_Cloud-Releases/main/INSTALL_GUIDE-v0.8.0.pdf)
 
+**🎬 Commercial Demo (90s, layman):** **[DEMO_VIDEO.mp4](https://github.com/siddgithub2022/ASM_Cloud-Releases/releases/download/v0.8.0/DEMO_VIDEO.mp4)** — installation to use on all devices + server connect (1920×1080, with captions) • **[Storyboard PDF](https://github.com/siddgithub2022/ASM_Cloud-Releases/releases/download/v0.8.0/DEMO_STORYBOARD.pdf)** • **[Script](https://raw.githubusercontent.com/siddgithub2022/ASM_Cloud-Releases/main/DEMO_SCRIPT.md)**
+
 ---
 
 ## 🔒 Security + Fix Notes
@@ -79,6 +81,18 @@ cd ../mobile && npx expo run:android
 Workflow: `.github/workflows/release.yml:1` builds all 4 on `git tag v*` → publishes here.
 
 ---
+
+## 🎬 Demo Video — Commercial (Installation → All Devices → Server)
+
+> **Watch:** `DEMO_VIDEO.mp4` (90s, 1920×1080) — Cover → Server `docker compose up` → Desktop Tauri `~/PersonalCloud` → Mobile Expo browse/keep offline → Camera auto-upload Wi-Fi → WebSocket sync all devices → Share link → Admin quotas.
+
+| File | Description |
+|------|-------------|
+| `DEMO_VIDEO.mp4` | 90s commercial, 30fps, captions, no ImageMagick needed (Pillow + imageio) |
+| `DEMO_STORYBOARD.pdf` | 8 scenes print-ready storyboard |
+| `DEMO_SCRIPT.md` | Full voiceover script for ElevenLabs |
+
+**How to connect all devices to server:** Desktop → Settings → Server URL `https://cloud.example.com` → Login `alice` → Mobile → same URL → Login → tray `● synced` pushes via `WS /sync` → `sync:changes` → all devices `sync now`.
 
 ## 📄 License & Branding
 MIT • `assets/logo.svg` • Theming `Inter/SF Pro/Roboto`, primary `#2E6FE0`, every screen `● Status | Storage used/total | Last synced`
