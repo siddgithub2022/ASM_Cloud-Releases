@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="120" viewBox="0 0 640 120">
+<title>ASM_Cloud Tray Icons - 20px grid</title>
+<g font-family="'Inter','Segoe UI',sans-serif">
+  <text x="20" y="20" font-size="11" font-weight="700" letter-spacing="1.5" fill="#6B7280">TRAY STATUS ICONS — 20PX GRID</text>
+</g>
+<!-- synced - green -->
+<g transform="translate(20,36)">
+  <rect width="96" height="72" rx="12" fill="#ECFDF5" stroke="#A7F3D0"/>
+  <g transform="translate(38,16)">
+    <path d="M 10 22 C 2 22 0 14 5 8 C 6 2 13 0 17 5 C 21 0 28 1 30 8 C 34 8 35 16 30 20 Z" fill="#10B981" stroke="#065F46" stroke-width="1"/>
+    <circle cx="20" cy="20" r="8" fill="white" stroke="#A7F3D0" stroke-width="1"/>
+    <path d="M 16 20 L 19 23 L 24 17" fill="none" stroke="#10B981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="48" y="62" text-anchor="middle" font-family="'Inter','Segoe UI',sans-serif" font-size="9" font-weight="700" letter-spacing="1" fill="#065F46">SYNCED</text>
+</g>
+<!-- syncing - amber -->
+<g transform="translate(136,36)">
+  <rect width="96" height="72" rx="12" fill="#FFFBEB" stroke="#FDE68A"/>
+  <g transform="translate(38,16)">
+    <path d="M 10 22 C 2 22 0 14 5 8 C 6 2 13 0 17 5 C 21 0 28 1 30 8 C 34 8 35 16 30 20 Z" fill="#F59E0B" stroke="#92400E" stroke-width="1"/>
+    <circle cx="20" cy="20" r="8" fill="white" stroke="#FDE68A" stroke-width="1"/>
+    <path d="M -3 -1 A 6 6 0 0 1 3 -1" transform="translate(20,20)" fill="none" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/>
+    <path d="M 3 1 A 6 6 0 0 1 -3 1" transform="translate(20,20)" fill="none" stroke="#F59E0B" stroke-width="1.4" stroke-linecap="round"/>
+  </g>
+  <text x="48" y="62" text-anchor="middle" font-family="'Inter','Segoe UI',sans-serif" font-size="9" font-weight="700" letter-spacing="1" fill="#92400E">SYNCING</text>
+</g>
+<!-- conflict/error - red -->
+<g transform="translate(252,36)">
+  <rect width="96" height="72" rx="12" fill="#FEF2F2" stroke="#FECACA"/>
+  <g transform="translate(38,16)">
+    <path d="M 10 22 C 2 22 0 14 5 8 C 6 2 13 0 17 5 C 21 0 28 1 30 8 C 34 8 35 16 30 20 Z" fill="#EF4444" stroke="#991B1B" stroke-width="1"/>
+    <circle cx="20" cy="20" r="8" fill="white" stroke="#FECACA" stroke-width="1"/>
+    <path d="M 17 17 L 23 23 M 23 17 L 17 23" fill="none" stroke="#EF4444" stroke-width="1.6" stroke-linecap="round"/>
+  </g>
+  <text x="48" y="62" text-anchor="middle" font-family="'Inter','Segoe UI',sans-serif" font-size="9" font-weight="700" letter-spacing="1" fill="#991B1B">CONFLICT</text>
+</g>
+<!-- offline - gray -->
+<g transform="translate(368,36)">
+  <rect width="96" height="72" rx="12" fill="#F3F4F6" stroke="#D1D5DB"/>
+  <g transform="translate(38,16)">
+    <path d="M 10 22 C 2 22 0 14 5 8 C 6 2 13 0 17 5 C 21 0 28 1 30 8 C 34 8 35 16 30 20 Z" fill="#9CA3AF" stroke="#4B5563" stroke-width="1"/>
+    <circle cx="20" cy="20" r="8" fill="white" stroke="#D1D5DB" stroke-width="1"/>
+    <path d="M 16 20 L 24 20" fill="none" stroke="#9CA3AF" stroke-width="1.6" stroke-linecap="round"/>
+  </g>
+  <text x="48" y="62" text-anchor="middle" font-family="'Inter','Segoe UI',sans-serif" font-size="9" font-weight="700" letter-spacing="1" fill="#4B5563">OFFLINE</text>
+</g>
+<!-- accent swatch -->
+<g transform="translate(484,36)">
+  <rect width="136" height="72" rx="12" fill="white" stroke="#E5E7EB"/>
+  <rect x="12" y="12" width="32" height="32" rx="8" fill="#2E6FE0"/>
+  <text x="54" y="24" font-family="'Inter','Segoe UI',sans-serif" font-size="10" font-weight="800" fill="#111827">#2E6FE0</text>
+  <text x="54" y="36" font-family="'Inter','Segoe UI',sans-serif" font-size="9" fill="#6B7280">Primary accent</text>
+  <circle cx="20" cy="58" r="6" fill="#10B981"/><circle cx="36" cy="58" r="6" fill="#F59E0B"/><circle cx="52" cy="58" r="6" fill="#EF4444"/><circle cx="68" cy="58" r="6" fill="#9CA3AF"/>
+  <text x="82" y="62" font-family="'Inter','Segoe UI',sans-serif" font-size="7" letter-spacing="0.8" fill="#6B7280">SEMANTIC ONLY</text>
+</g>
+</svg>

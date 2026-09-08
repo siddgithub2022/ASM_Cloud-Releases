@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img">
+<title>ASM_Cloud Icon</title>
+<defs>
+  <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#2E6FE0"/>
+    <stop offset="100%" stop-color="#1A3FA0"/>
+  </linearGradient>
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#1A3FA0" flood-opacity="0.25"/>
+  </filter>
+</defs>
+<rect width="256" height="256" rx="56" fill="white"/>
+<g filter="url(#shadow)" transform="translate(28,36)">
+  <rect x="8" y="98" width="120" height="12" rx="6" fill="#E6ECF5"/>
+  <path d="M 32 92 C 8 92 0 68 18 50 C 23 24 52 14 72 29 C 89 12 116 17 124 40 C 144 40 146 72 124 87 L 92 87 Z" 
+        fill="url(#g)" stroke="#1A3FA0" stroke-width="2" stroke-linejoin="round"/>
+  <g fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.96">
+    <path d="M 38 68 L 78 68 L 90 56 L 50 56 Z"/>
+    <path d="M 38 78 L 84 78 L 96 66 L 50 66 Z"/>
+  </g>
+  <g transform="translate(108,96)">
+    <circle cx="0" cy="0" r="22" fill="white" stroke="#D9E2F3" stroke-width="2"/>
+    <path d="M -9 -5 A 12 12 0 0 1 9 -5" fill="none" stroke="#2E6FE0" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M 6 -9 L 9 -5 L 5 -2" fill="none" stroke="#2E6FE0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 9 5 A 12 12 0 0 1 -9 5" fill="none" stroke="#2E6FE0" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M -6 9 L -9 5 L -5 2" fill="none" stroke="#2E6FE0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</g>
+<!-- ASM monogram small -->
+<g font-family="'Inter','Segoe UI',Roboto,sans-serif" text-anchor="middle">
+  <text x="128" y="212" font-size="16" font-weight="800" letter-spacing="2" fill="#1A3FA0">ASM_CLOUD</text>
+</g>
+</svg>

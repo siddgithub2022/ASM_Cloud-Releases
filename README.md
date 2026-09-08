@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/siddgithub2022/ASM_Cloud/main/assets/logo.svg" width="520" alt="ASM_Cloud"/>
+  <img src="https://raw.githubusercontent.com/siddgithub2022/ASM_Cloud-Releases/main/assets/logo.svg" width="520" alt="ASM_Cloud"/>
 </p>
 
 <h1 align="center">ASM_Cloud — Public Downloads</h1>
@@ -56,7 +56,7 @@ curl -X POST http://localhost:3000/api/auth/register -H "Content-Type: applicati
 1. Install APK/IPA → Login `https://cloud.example.com` → Browse cloud → `Keep offline ✓`
 2. Camera tab → Enable auto-upload (Wi-Fi only) → Run now
 
-Full visual guide (with pictures): **[INSTALL_GUIDE.pdf](https://raw.githubusercontent.com/siddgithub2022/ASM_Cloud/main/docs/INSTALL_GUIDE.pdf)** (also in `docs/INSTALL_GUIDE.html` printable)
+Full visual guide (with pictures): **[INSTALL_GUIDE.pdf](https://github.com/siddgithub2022/ASM_Cloud-Releases/releases/download/v0.8.0/INSTALL_GUIDE-v0.8.0.pdf)** — also **[HTML printable](https://github.com/siddgithub2022/ASM_Cloud-Releases/releases/download/v0.8.0/INSTALL_GUIDE-v0.8.0.html)** or [`INSTALL_GUIDE-v0.8.0.pdf` direct](https://raw.githubusercontent.com/siddgithub2022/ASM_Cloud-Releases/main/INSTALL_GUIDE-v0.8.0.pdf)
 
 ---
 
